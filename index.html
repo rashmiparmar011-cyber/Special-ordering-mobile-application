@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="SpecialRx – UK Pharmaceutical Special Order Application for pharmacies to order unlicensed, imported, tariff and non-tariff medicines." />
+  <title>SpecialRx – Pharmaceutical Special Orders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app" class="app-container">
+
+    <!-- ========== SPLASH SCREEN ========== -->
+    <div id="screen-splash" class="screen active">
+      <div class="splash-content">
+        <div class="splash-logo-container">
+          <div class="splash-logo" style="background: transparent; backdrop-filter: none; border-radius: 50%; padding: 0; width: 140px; height: 140px; margin-bottom: 15px;">
+            <img src="images/bs-logo.png" alt="B&S Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%;" />
+          </div>
+          <h1 class="splash-title">B&S <span style="color: #48e5c2;">| SPECIALS</span></h1>
+          <p class="splash-subtitle" style="text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Leading Special's Service Provider</p>
+        </div>
+        <div class="splash-loader" style="margin-top: 40px;">
+          <div class="loader-bar"><div class="loader-fill"></div></div>
+          <p class="splash-loading-text">Loading secure environment...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== LOGIN SCREEN ========== -->
+    <div id="screen-login" class="screen">
+      <div class="auth-screen">
+        <div class="auth-header">
+          <div class="auth-logo" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;">
+            <div class="auth-logo-icon" style="background: white; border-radius: 50%; padding: 4px; display: flex; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+              <img src="images/bs-logo.png" alt="B&S Logo" style="width: 44px; height: 44px; object-fit: contain; border-radius: 50%;" />
+            </div>
+            <span style="color: #112A46; font-weight: 800; font-size: 24px; letter-spacing: 0.5px; text-transform: uppercase;">Specials</span>
+          </div>
+        </div>
+        <div class="auth-body" style="padding-top: 10px;">
+          <form id="login-form" class="auth-form" novalidate>
+            <div id="login-email-fields">
+              <div class="form-group">
+                <label>Email Address</label>
+                <div class="input-wrapper">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <input type="email" id="login-email" placeholder="pharmacy@example.com" value="admin@greencross.co.uk" />
+                </div>
+                <span class="field-error" id="login-email-error"></span>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <div class="input-wrapper">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <input type="password" id="login-password" placeholder="Enter your password" value="password123" />
+                  <button type="button" class="toggle-password" onclick="togglePassword('login-password', this)">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+                <span class="field-error" id="login-password-error"></span>
+              </div>
+            </div>
+            <div id="login-mobile-fields" class="hidden">
+              <div class="form-group">
+                <label>Mobile Number</label>
+                <div class="input-wrapper">
+                  <span class="input-prefix">+44</span>
+                  <input type="tel" id="login-mobile" placeholder="7700 900000" />
+                </div>
+                <span class="field-error" id="login-mobile-error"></span>
+              </div>
+              <div class="form-group">
+                <label>Password</label>
+                <div class="input-wrapper">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <input type="password" id="login-mobile-pass" placeholder="Enter your password" />
+                </div>
+              </div>
+            </div>
+            <div id="login-otp-fields" class="hidden">
+              <div class="form-group">
+                <label>Mobile Number</label>
+                <div class="input-wrapper">
+                  <span class="input-prefix">+44</span>
+                  <input type="tel" id="login-otp-mobile" placeholder="7700 900000" />
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline btn-full" onclick="sendLoginOTP()">Send OTP</button>
+              <div id="login-otp-entry" class="hidden" style="margin-top:16px;">
+                <div class="otp-inputs">
+                  <input type="text" maxlength="1" class="otp-box" data-otp="1" />
+                  <input type="text" maxlength="1" class="otp-box" data-otp="2" />
+                  <input type="text" maxlength="1" class="otp-box" data-otp="3" />
+                  <input type="text" maxlength="1" class="otp-box" data-otp="4" />
+                  <input type="text" maxlength="1" class="otp-box" data-otp="5" />
+                  <input type="text" maxlength="1" class="otp-box" data-otp="6" />
+                </div>
+              </div>
+            </div>
+            <div class="form-options">
+              <label class="checkbox-label">
+                <input type="checkbox" checked /> <span class="checkmark"></span> Remember Email
+              </label>
+              <a href="#" onclick="navigateTo('screen-forgot-password');return false;" style="color: #1e3a8a; font-weight: 600;">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" id="login-btn" style="background: #1e3a8a; border-color: #1e3a8a;">
+              <span>Sign In</span>
+            </button>
+          </form>
+          <div class="auth-footer">
+            <p>Don't have an account? <a href="#" onclick="navigateTo('screen-register');return false;" style="color: #1e3a8a; font-weight: 600;">Register</a></p>
+          </div>
+        </div>
+        <div class="powered-by-footer" style="text-align: center; margin-top: 120px; padding-bottom: 20px;">
+          <p style="font-size: 11px; color: #64748b; margin-bottom: 8px; font-weight: 500;">Powered by</p>
+          <div style="display: flex; justify-content: center; align-items: center; gap: 16px;">
+            <img src="images/bs-logo.png" alt="B&S Logo" style="height: 32px; object-fit: contain;" />
+            <div style="width: 1px; height: 24px; background: #e2e8f0;"></div>
+            <img src="images/thame-logo.png" alt="Thame Logo" style="height: 24px; object-fit: contain;" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== REGISTRATION SCREEN ========== -->
+    <div id="screen-register" class="screen">
+      <div class="auth-screen">
+        <div class="screen-top-bar">
+          <button class="back-btn" onclick="navigateTo('screen-login')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <h2>Account Creating Request</h2>
+          <div style="width:40px"></div>
+        </div>
+        <div class="auth-body scrollable" style="padding-top: 10px;">
+          <div style="display:flex; align-items:center; gap: 8px; color: #1e3a8a; font-weight:700; margin-bottom: 20px;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Pharmacy Name & Personal Details
+          </div>
+          <form id="register-form" class="auth-form" novalidate>
+            <div class="form-group">
+              <label>Pharmacy Name <span class="required" style="color: #ef4444;">*</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                <input type="text" id="reg-name" placeholder="Enter pharmacy store name" />
+              </div>
+              <span class="field-error" id="reg-name-error"></span>
+            </div>
+            <div class="form-group">
+              <label>Mobile Number <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <span class="input-prefix">+44</span>
+                <input type="tel" id="reg-mobile" placeholder="7700 900000" />
+              </div>
+              <span class="field-error" id="reg-mobile-error"></span>
+            </div>
+            <div class="form-group">
+              <label>Email Address <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input type="email" id="reg-email" placeholder="pharmacy@example.com" />
+              </div>
+              <span class="field-error" id="reg-email-error"></span>
+            </div>
+            <div class="form-group">
+              <label>Password <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input type="password" id="reg-password" placeholder="Create a strong password" />
+                <button type="button" class="toggle-password" onclick="togglePassword('reg-password', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <div class="password-strength" id="password-strength">
+                <div class="strength-bars">
+                  <div class="strength-bar"></div><div class="strength-bar"></div><div class="strength-bar"></div><div class="strength-bar"></div>
+                </div>
+                <span class="strength-text">Password Strength</span>
+              </div>
+              <span class="field-error" id="reg-password-error"></span>
+            </div>
+            <div class="form-group">
+              <label>Confirm Password <span class="required">*</span></label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input type="password" id="reg-confirm-password" placeholder="Confirm your password" />
+              </div>
+              <span class="field-error" id="reg-confirm-password-error"></span>
+            </div>
+            <div class="form-group">
+              <label>Delivery Address <span class="required">*</span></label>
+              <div class="input-wrapper textarea-wrapper">
+                <textarea id="reg-address" placeholder="Enter your pharmacy delivery address" rows="3"></textarea>
+              </div>
+              <span class="field-error" id="reg-address-error"></span>
+            </div>
+            <label class="checkbox-label" style="margin-bottom:20px;">
+              <input type="checkbox" id="reg-terms" /> <span class="checkmark"></span>
+              I agree to the <a href="#" onclick="event.stopPropagation();">Terms & Conditions</a> and <a href="#" onclick="event.stopPropagation();">Privacy Policy</a>
+            </label>
+            <span class="field-error" id="reg-terms-error"></span>
+            <button type="submit" class="btn btn-primary btn-full" style="background: #1e3a8a; border-color: #1e3a8a;">Submit Request</button>
+          </form>
+          <div class="auth-footer">
+            <p>Already have an account? <a href="#" onclick="navigateTo('screen-login');return false;" style="color: #1e3a8a; font-weight: 600;">Sign In</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== OTP VERIFICATION ========== -->
+    <div id="screen-otp" class="screen">
+      <div class="auth-screen">
+        <div class="screen-top-bar">
+          <button class="back-btn" onclick="navigateTo('screen-register')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <h2>Verify OTP</h2>
+          <div style="width:40px"></div>
+        </div>
+        <div class="auth-body" style="text-align:center;">
+          <div class="otp-illustration">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="55" fill="var(--primary-light)" opacity="0.2"/>
+              <circle cx="60" cy="60" r="40" fill="var(--primary-light)" opacity="0.3"/>
+              <rect x="35" y="30" width="50" height="60" rx="8" fill="var(--primary)" opacity="0.9"/>
+              <rect x="42" y="50" width="36" height="8" rx="4" fill="white" opacity="0.8"/>
+              <rect x="42" y="62" width="24" height="8" rx="4" fill="white" opacity="0.5"/>
+              <circle cx="60" cy="40" r="5" fill="white" opacity="0.7"/>
+            </svg>
+          </div>
+          <h3 style="margin:20px 0 8px;">Verification Code</h3>
+          <p class="form-section-desc">We've sent a 6-digit code to your registered mobile number</p>
+          <p class="otp-phone-display">+44 •••• ••• 000</p>
+          <div class="otp-inputs" style="margin:24px 0;">
+            <input type="text" maxlength="1" class="otp-box" data-otp-reg="1" />
+            <input type="text" maxlength="1" class="otp-box" data-otp-reg="2" />
+            <input type="text" maxlength="1" class="otp-box" data-otp-reg="3" />
+            <input type="text" maxlength="1" class="otp-box" data-otp-reg="4" />
+            <input type="text" maxlength="1" class="otp-box" data-otp-reg="5" />
+            <input type="text" maxlength="1" class="otp-box" data-otp-reg="6" />
+          </div>
+          <div class="otp-timer">
+            <span id="otp-timer-text">Resend OTP in <strong id="otp-countdown">30</strong>s</span>
+            <button class="btn-link hidden" id="resend-otp-btn" onclick="resendOTP()">Resend OTP</button>
+          </div>
+          <button class="btn btn-primary btn-full" style="margin-top:24px;" onclick="verifyOTP()">Verify & Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== FORGOT PASSWORD ========== -->
+    <div id="screen-forgot-password" class="screen">
+      <div class="auth-screen">
+        <div class="screen-top-bar">
+          <button class="back-btn" onclick="navigateTo('screen-login')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <h2>Reset Password</h2>
+          <div style="width:40px"></div>
+        </div>
+        <div class="auth-body" style="text-align:center;">
+          <div class="otp-illustration">
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <circle cx="60" cy="60" r="55" fill="#FFF3E0" opacity="0.5"/>
+              <circle cx="60" cy="60" r="40" fill="#FFB74D" opacity="0.2"/>
+              <rect x="35" y="35" width="50" height="50" rx="12" fill="var(--primary)"/>
+              <path d="M60 50 L60 65" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="60" cy="72" r="2.5" fill="white"/>
+            </svg>
+          </div>
+          <h3 style="margin:20px 0 8px;">Forgot Your Password?</h3>
+          <p class="form-section-desc">Enter your email to receive a reset link</p>
+          <form id="forgot-form" class="auth-form" style="text-align:left;margin-top:24px;" novalidate>
+            <div class="form-group">
+              <label>Email Address</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <input type="email" id="forgot-email" placeholder="pharmacy@example.com" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full" style="background: #1e3a8a; border-color: #1e3a8a;">Send Reset Link</button>
+          </form>
+          <div id="forgot-success" class="hidden" style="margin-top:24px;">
+            <div class="success-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="2" width="48" height="48"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3 style="margin:16px 0 8px;color:var(--success);">Email Sent!</h3>
+            <p class="form-section-desc">Check your inbox for password reset instructions</p>
+            <button class="btn btn-primary btn-full" style="margin-top:20px;" onclick="navigateTo('screen-login')">Back to Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SELECT PHARMACY ========== -->
+    <div id="screen-select-pharmacy" class="screen">
+      <div class="full-screen-page">
+        <div class="screen-top-bar">
+          <div style="width:40px"></div>
+          <h2>Select Pharmacy</h2>
+          <div style="width:40px"></div>
+        </div>
+        <div class="page-body scrollable">
+          <p class="form-section-desc" style="text-align:center;margin-bottom:20px;">Choose the pharmacy you're ordering for today</p>
+          <div class="search-bar-mini">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="pharmacy-search" placeholder="Search pharmacy..." oninput="filterPharmacies(this.value)" />
+          </div>
+          <div id="pharmacy-list" class="pharmacy-list">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== MAIN APP (with bottom nav) ========== -->
+    <div id="screen-main" class="screen">
+      <div class="main-app">
+        <!-- TOP STATUS BAR -->
+        <div class="app-status-bar">
+          <span class="status-time" id="status-time">13:36</span>
+          <div class="status-icons">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><rect x="17" y="4" width="4" height="16" rx="1"/><rect x="11" y="8" width="4" height="12" rx="1"/><rect x="5" y="12" width="4" height="8" rx="1"/></svg>
+            <span class="battery-icon">87%</span>
+          </div>
+        </div>
+
+        <!-- PAGE CONTAINER -->
+        <div class="page-container">
+
+          <!-- ===== HOME / DASHBOARD ===== -->
+          <div id="page-home" class="page active">
+            <div class="page-header-dashboard" style="background: #1e3a8a; padding: 16px 20px; border-radius: 0 0 16px 16px; margin-bottom: 8px; position: relative; z-index: 101;">
+              <div style="display: flex; align-items: center; justify-content: space-between; color: white; cursor: pointer;" onclick="document.getElementById('pharmacy-smart-dropdown').style.display = document.getElementById('pharmacy-smart-dropdown').style.display === 'none' ? 'block' : 'none'">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h2 id="selected-pharmacy-name" style="font-size: 16px; font-weight: 700; margin: 0; color: white;">Green Cross Pharmacy</h2>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+              
+              <!-- Pharmacy Dropdown Menu -->
+              <div id="pharmacy-smart-dropdown" style="display: none; position: absolute; top: 100%; left: 16px; right: 16px; margin-top: 4px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100; padding: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 12px; margin-bottom: 8px;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" placeholder="Search pharmacy..." style="border: none; outline: none; width: 100%; font-size: 14px; color: #1e293b;" />
+                </div>
+                <div style="background: #eff6ff; border-radius: 8px; padding: 12px; margin-bottom: 4px; cursor: pointer;">
+                  <div style="font-size: 14px; font-weight: 700; color: #1e3a8a;">Green Cross Pharmacy</div>
+                  <div style="font-size: 11px; color: #64748b; margin-top: 2px;">Ac no: B5010, W8 4PT</div>
+                </div>
+                <div style="padding: 12px; margin-bottom: 4px; border-bottom: 1px solid #f8fafc; cursor: pointer;">
+                  <div style="font-size: 14px; font-weight: 600; color: #1e293b;">CarePlus Pharmacy</div>
+                  <div style="font-size: 11px; color: #64748b; margin-top: 2px;">Ac no: B5011, B1 1PN</div>
+                </div>
+                <div style="padding: 12px; cursor: pointer;">
+                  <div style="font-size: 14px; font-weight: 600; color: #1e293b;">MedPoint Pharmacy</div>
+                  <div style="font-size: 11px; color: #64748b; margin-top: 2px;">Ac no: B5012, M3 4LZ</div>
+                </div>
+              </div>
+            </div>
+            <div class="page-scroll">
+              <div style="padding: 12px 20px;">
+                <div class="search-bar" style="background: white; border: 1px solid #e2e8f0; border-radius: 24px; padding: 10px 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" placeholder="Search by Order No, Date" style="border: none; outline: none; width: 100%; font-size: 14px;" />
+                </div>
+              </div>
+
+              <!-- Recent Orders -->
+              <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; padding: 4px 20px 12px;">
+                <h3 style="margin: 0; font-size: 15px; font-weight: 700; color: #1e293b;">Recent Orders</h3>
+                <a href="#" class="see-all" onclick="showPage('page-orders');return false;" style="color: #1e3a8a; font-weight: 700; font-size: 13px;">See All</a>
+              </div>
+              <div id="recent-orders-list" class="orders-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== SEARCH / MEDICINES ===== -->
+          <div id="page-search" class="page">
+            <div class="page-header-dashboard" style="background: #1e3a8a; padding: 16px 20px; border-radius: 0 0 16px 16px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">MedPoint Pharmacy</h2>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5012</span>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">M3 4LZ</span>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <div class="page-header-simple" style="padding: 4px 20px 8px; display: flex; justify-content: center; background: transparent;">
+              <h2 style="font-size: 16px; font-weight: 700; color: #1e293b;">New Order</h2>
+            </div>
+            <div class="page-scroll">
+              <div class="search-bar" style="background: white; border: 1px solid #e2e8f0; border-radius: 24px; padding: 10px 16px; margin: 0 20px 12px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="medicine-search" placeholder="Search by name" oninput="searchMedicines(this.value)" style="border: none; outline: none; width: 100%; font-size: 14px;" />
+              </div>
+              <!-- Category Tabs -->
+              <div class="category-tabs" style="padding: 0 20px 16px; gap: 8px; display: flex; overflow-x: auto; background: transparent; border: none;">
+                <button class="cat-tab active" data-cat="all" onclick="filterByCategory('all', this)" style="background: #1e3a8a; color: white; border-radius: 20px; padding: 6px 16px; border: none; font-weight: 600;">All</button>
+                <button class="cat-tab" data-cat="tariff" onclick="filterByCategory('tariff', this)" style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 6px 16px; color: #64748b; font-weight: 600;">Tariff</button>
+                <button class="cat-tab" data-cat="non-tariff" onclick="filterByCategory('non-tariff', this)" style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 6px 16px; color: #64748b; font-weight: 600;">Non-Tariff</button>
+                <button class="cat-tab" data-cat="obtain" onclick="filterByCategory('obtain', this)" style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 6px 16px; color: #64748b; font-weight: 600;">Obtain</button>
+              </div>
+              <!-- Filter Panel -->
+              <div id="filter-panel" class="filter-panel hidden">
+                <div class="filter-section">
+                  <h4>Availability</h4>
+                  <div class="filter-chips">
+                    <button class="chip active" onclick="toggleChip(this)">All</button>
+                    <button class="chip" onclick="toggleChip(this)">In Stock</button>
+                    <button class="chip" onclick="toggleChip(this)">Out of Stock</button>
+                  </div>
+                </div>
+                <div class="filter-section">
+                  <h4>Prescription</h4>
+                  <div class="filter-chips">
+                    <button class="chip active" onclick="toggleChip(this)">All</button>
+                    <button class="chip" onclick="toggleChip(this)">Rx Required</button>
+                    <button class="chip" onclick="toggleChip(this)">Non-Rx</button>
+                  </div>
+                </div>
+              </div>
+              <!-- Products Grid -->
+              <div id="products-grid" class="products-grid">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== PRODUCT DETAIL ===== -->
+          <div id="page-product-detail" class="page">
+            <div class="page-header-simple" style="position:relative;">
+              <button class="back-btn" onclick="showPage('page-search')" style="position:absolute;left:16px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <h2>Product Details</h2>
+            </div>
+            <div class="page-scroll" id="product-detail-content">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- ===== CART ===== -->
+          <div id="page-cart" class="page">
+            <div class="page-header-dashboard" style="background: #1e3a8a; padding: 16px 20px; border-radius: 0 0 16px 16px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">MedPoint Pharmacy</h2>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5012</span>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">M3 4LZ</span>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <div class="page-header-simple" style="padding: 4px 20px 8px; display: flex; justify-content: center; align-items: center; gap: 8px; background: transparent;">
+              <h2 style="font-size: 16px; font-weight: 700; color: #1e293b; text-align: center; margin: 0;">Order Cart</h2>
+              <span class="cart-count-badge" id="cart-header-count" style="background: #1e3a8a; color: white; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">0</span>
+            </div>
+            <div class="page-scroll" id="cart-content">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- ===== ORDER SUCCESS ===== -->
+          <div id="page-order-success" class="page">
+            <div class="page-scroll" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px 24px;text-align:center;">
+              <div class="success-animation">
+                <div class="success-circle">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="48" height="48"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+              </div>
+              <h2 style="margin:24px 0 8px;color:var(--text-primary);">Order Placed Successfully!</h2>
+              <p class="form-section-desc">Your order has been submitted and is being processed</p>
+              <div class="order-success-card">
+                <div class="success-detail"><span>Order ID</span><strong id="success-order-id">SRX-20260522-0045</strong></div>
+                <div class="success-detail"><span>Date</span><strong>22 May 2026</strong></div>
+                <div class="success-detail"><span>Status</span><span class="status-pill status-received">Order Received</span></div>
+                <div class="success-detail"><span>Expected Delivery</span><strong>24-26 May 2026</strong></div>
+              </div>
+              <button class="btn btn-primary btn-full" style="margin-top:24px;" onclick="viewOrderTracking(latestOrderId)">Track Order</button>
+              <button class="btn btn-outline btn-full" style="margin-top:12px;" onclick="showPage('page-home');switchTab('home');">Back to Home</button>
+            </div>
+          </div>
+
+          <!-- ===== ORDERS ===== -->
+          <div id="page-orders" class="page">
+            <div class="page-header-dashboard" style="background: #1e3a8a; padding: 16px 20px; border-radius: 0 0 16px 16px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">Green Cross Pharmacy</h2>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <div class="page-header-simple" style="padding: 4px 20px 8px; display: flex; justify-content: center; background: transparent;">
+              <h2 style="font-size: 16px; font-weight: 700; color: #1e293b; margin: 0;">Order History</h2>
+            </div>
+            <div class="page-scroll">
+              <div class="order-tabs" id="order-tabs" style="padding: 0 20px 16px; gap: 8px; display: flex; background: transparent; border: none;">
+                <button class="order-tab" data-otab="active" onclick="setOrderTab('active')" style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 6px 16px; color: #64748b; font-weight: 600;">Recent Orders</button>
+                <button class="order-tab active" data-otab="previous" onclick="setOrderTab('previous')" style="background: #1e3a8a; color: white; border-radius: 20px; padding: 6px 16px; border: none; font-weight: 600;">Previous Orders</button>
+              </div>
+              <div style="margin: 0 20px 16px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); background: white;">
+                <div style="display: flex; justify-content: space-between; align-items: center; color: #2563eb; font-weight: 700; font-size: 12px; margin-bottom: 12px;">
+                  <div style="display: flex; align-items: center; gap: 6px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                    FILTER HISTORICAL ORDERS
+                  </div>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="18 15 12 9 6 15"/></svg>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
+                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Last 7 Days</button>
+                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Last 15 Days</button>
+                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Last 30 Days</button>
+                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Last 3 Months</button>
+                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">2025</button>
+                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">2024</button>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                  <button style="flex: 1; padding: 10px; border: 1px solid #e2e8f0; background: white; color: #64748b; font-weight: 700; border-radius: 8px;">Clear</button>
+                  <button style="flex: 1; padding: 10px; border: none; background: #1e3a8a; color: white; font-weight: 700; border-radius: 8px;">Apply</button>
+                </div>
+              </div>
+              <div id="orders-list-container" class="orders-list">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== ORDER TRACKING ===== -->
+          <div id="page-order-tracking" class="page">
+            <div class="page-header-dashboard" style="background: #1e3a8a; padding: 16px 20px; border-radius: 0 0 16px 16px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">MedPoint Pharmacy</h2>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5012</span>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">M3 4LZ</span>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <div class="page-header-simple" style="padding: 4px 20px 8px; display: flex; align-items: center; justify-content: center; background: transparent; position: relative;">
+              <button class="back-btn" onclick="showPage('page-orders')" style="position: absolute; left: 20px; background: none; border: none; padding: 0;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20" color="#1e293b"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <h2 style="font-size: 16px; font-weight: 700; color: #1e293b; margin: 0;">Order Tracking</h2>
+            </div>
+            <div class="page-scroll" id="order-tracking-content">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- ===== NOTIFICATIONS ===== -->
+          <div id="page-notifications" class="page">
+            <div class="page-header-dashboard" style="background: #1e3a8a; padding: 16px 20px; border-radius: 0 0 16px 16px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">Green Cross Pharmacy</h2>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <div class="page-header-simple" style="padding: 4px 20px 8px; display: flex; align-items: center; justify-content: center; background: transparent; position: relative;">
+              <button class="back-btn" onclick="showPage('page-home')" style="position: absolute; left: 20px; background: none; border: none; padding: 0;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="20" height="20" color="#1e293b"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <h2 style="font-size: 16px; font-weight: 700; color: #1e293b; margin: 0;">Notifications</h2>
+            </div>
+            <div class="page-scroll" id="notifications-content">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- ===== HELP & SUPPORT ===== -->
+          <div id="page-help" class="page">
+            <div class="page-header-dashboard" style="background: #1e3a8a; padding: 16px 20px; border-radius: 0 0 16px 16px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">Green Cross Pharmacy</h2>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
+                </div>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <div class="page-header-simple" style="padding: 4px 20px 8px; display: flex; justify-content: center; background: transparent;">
+              <h2 style="font-size: 16px; font-weight: 700; color: #1e293b;">Help & Support</h2>
+            </div>
+            <div class="page-scroll">
+              <div class="support-tabs" style="padding: 0 20px 16px; gap: 8px; display: flex; overflow-x: auto; background: transparent; border: none;">
+                <button class="order-tab active" data-stab="order-support" onclick="setSupportTab('order-support')" style="background: #1e3a8a; color: white; border-radius: 20px; padding: 6px 16px; border: none; font-weight: 600;">Order Support</button>
+                <button class="order-tab" data-stab="new-product" onclick="setSupportTab('new-product')" style="background: white; border: 1px solid #e2e8f0; border-radius: 20px; padding: 6px 16px; color: #64748b; font-weight: 600;">New Product Enquiry</button>
+              </div>
+              <div id="support-content" style="padding: 0 20px;">
+                <!-- Content handled by JS or static form below -->
+                <div class="support-card" style="background: white; border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px;">
+                  <h3 style="color: #1e3a8a; font-size: 16px; font-weight: 700; margin-bottom: 16px;">Order Support</h3>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">Order Number</label>
+                    <input type="text" placeholder="e.g. SRX-20260522-0042" style="width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; font-size: 14px;" />
+                  </div>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">Product Name</label>
+                    <input type="text" placeholder="Auto-populated" style="width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; font-size: 14px; color: #94a3b8;" readonly />
+                  </div>
+                  <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                    <div class="form-group" style="flex: 1;">
+                      <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">Quantity</label>
+                      <input type="text" placeholder="Auto-populated" style="width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; font-size: 14px; color: #94a3b8;" readonly />
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                      <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">Pack Size</label>
+                      <input type="text" placeholder="Auto-populated" style="width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; background: #f8fafc; font-size: 14px; color: #94a3b8;" readonly />
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">Issue Category</label>
+                    <select style="width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; color: #1e293b; background: white;">
+                      <option>Select Issue Category</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 8px;">Response Type</label>
+                    <div style="display: flex; gap: 16px; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px;">
+                      <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: #475569;">
+                        <input type="radio" name="responseType" style="accent-color: #1e3a8a;" /> Call Back
+                      </label>
+                      <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: #1e3a8a;">
+                        <input type="radio" name="responseType" checked style="accent-color: #1e3a8a;" /> Email
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 16px;">
+                    <label style="font-size: 12px; font-weight: 600; color: #475569; display: block; margin-bottom: 4px;">Additional Notes</label>
+                    <textarea placeholder="Enter additional details regarding your issue..." rows="3" style="width: 100%; padding: 10px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-family: inherit; resize: none;"></textarea>
+                  </div>
+                  <button class="btn btn-primary btn-full" style="background: #1e3a8a; border-color: #1e3a8a; border-radius: 8px; padding: 12px;">Submit Support Request</button>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <h3 style="color: #1e3a8a; font-size: 15px; font-weight: 700; margin: 0;">Order Tickets History</h3>
+                  <div style="display: flex; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; background: white;">
+                    <button style="padding: 4px 12px; border: none; background: white; color: #1e3a8a; font-weight: 600; font-size: 12px;">Open</button>
+                    <button style="padding: 4px 12px; border: none; background: white; color: #94a3b8; font-weight: 600; font-size: 12px;">Closed</button>
+                  </div>
+                </div>
+                
+                <div class="ticket-card" style="background: white; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; border-left: 4px solid #1e3a8a;">
+                  <div>
+                    <div style="font-size: 14px; font-weight: 700; color: #1e3a8a; margin-bottom: 4px;">SR-2026-0015</div>
+                    <div style="font-size: 11px; color: #64748b;">Order No: SRX-20260519-0033</div>
+                  </div>
+                  <span style="color: #f59e0b; background: #fef3c7; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 600;">Open</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== ACCOUNT ===== -->
+          <div id="page-account" class="page">
+            <div class="page-scroll" style="background: #f8fafc;">
+              <div style="background: linear-gradient(135deg, #1e3a8a, #0f172a); border-radius: 0 0 32px 32px; padding: 24px 20px 48px; text-align: center; color: white; position: relative;">
+                <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 8px;">
+                  <h2 style="font-size: 18px; font-weight: 700; margin: 0;">Green Cross Pharmacy</h2>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
+                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
+                </div>
+                <p style="color: #cbd5e1; font-size: 14px; margin: 0;">admin@greencross.co.uk</p>
+              </div>
+              
+              <!-- Credit Account Card -->
+              <div style="margin: -32px 20px 24px; background: #1e293b; border-radius: 16px; padding: 20px; color: white; box-shadow: 0 4px 12px rgba(0,0,0,0.15); position: relative; z-index: 10;">
+                <div style="font-size: 10px; font-weight: 700; color: #94a3b8; letter-spacing: 1px; margin-bottom: 16px; text-transform: uppercase;">Credit Account</div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                  <div>
+                    <div style="font-size: 10px; font-weight: 600; color: #cbd5e1; margin-bottom: 4px; text-transform: uppercase;">Credit Limit</div>
+                    <div style="font-size: 16px; font-weight: 700;">£25,000</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; font-weight: 600; color: #cbd5e1; margin-bottom: 4px; text-transform: uppercase;">Available</div>
+                    <div style="font-size: 16px; font-weight: 700;">£18,450</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; font-weight: 600; color: #cbd5e1; margin-bottom: 4px; text-transform: uppercase;">Due Amount</div>
+                    <div style="font-size: 16px; font-weight: 700;">£6,550</div>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 40px;">
+                  <div>
+                    <div style="font-size: 10px; font-weight: 600; color: #cbd5e1; margin-bottom: 4px; text-transform: uppercase;">Payment Terms</div>
+                    <div style="font-size: 14px; font-weight: 700;">Net 30</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10px; font-weight: 600; color: #cbd5e1; margin-bottom: 4px; text-transform: uppercase;">Daily Limit</div>
+                    <div style="font-size: 14px; font-weight: 700;">£5,000</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Account Menu -->
+              <div class="account-menu" style="padding: 0 20px;">
+                <div class="menu-section" style="margin-bottom: 24px;">
+                  <h4 style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; margin-left: 4px;">Orders & Activity</h4>
+                  <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+                    <button class="menu-item" onclick="showPage('page-orders');switchTab('orders');" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
+                        <div class="mi-icon blue-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #eff6ff; color: #3b82f6; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">My Order</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                    <button class="menu-item" onclick="showPage('page-help');switchTab('help');" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
+                        <div class="mi-icon orange-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #fff7ed; color: #f97316; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" width="16" height="16"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">Service Requests</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                    <button class="menu-item" onclick="showAccountSubpage('prescriptions')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; cursor: pointer;">
+                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
+                        <div class="mi-icon green-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #f0fdf4; color: #22c55e; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">My Prescriptions</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="menu-section" style="margin-bottom: 32px;">
+                  <h4 style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; margin-left: 4px;">Account Settings</h4>
+                  <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+                    <button class="menu-item" onclick="showPage('page-notifications')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
+                        <div class="mi-icon orange-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #fff7ed; color: #f97316; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">Notifications</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                    <button class="menu-item" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
+                        <div class="mi-icon green-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #f0fdf4; color: #22c55e; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" width="16" height="16"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">Privacy & Security</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                    <button class="menu-item" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
+                        <div class="mi-icon purple-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #faf5ff; color: #a855f7; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">App Settings</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                    <button class="menu-item logout-item" onclick="logout()" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; cursor: pointer;">
+                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
+                        <div class="mi-icon red-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #fef2f2; color: #ef4444; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        </div>
+                        <span style="font-size: 14px; font-weight: 600; color: #ef4444;">Logout</span>
+                      </div>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end page-container -->
+
+        <!-- BOTTOM NAV -->
+        <nav class="bottom-nav" id="bottom-nav">
+          <button class="nav-item active" data-tab="home" onclick="switchTab('home')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Home</span>
+          </button>
+          <button class="nav-item" data-tab="search" onclick="switchTab('search')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span>New Order</span>
+          </button>
+          <button class="nav-item cart-nav" data-tab="cart" onclick="switchTab('cart')">
+            <div class="cart-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+              <span class="cart-badge" id="cart-badge">7</span>
+            </div>
+            <span>Cart</span>
+          </button>
+          <button class="nav-item" data-tab="orders" onclick="switchTab('orders')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span>My Orders</span>
+          </button>
+          <button class="nav-item cart-nav" data-tab="inbox" onclick="switchTab('inbox')">
+            <div class="cart-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>
+              <span class="cart-badge" style="background: #ef4444;">1</span>
+            </div>
+            <span>Inbox</span>
+          </button>
+          <button class="nav-item" data-tab="account" onclick="switchTab('account')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span>Account</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <!-- ========== LOADING OVERLAY ========== -->
+    <div id="loading-overlay" class="loading-overlay hidden">
+      <div class="loading-spinner">
+        <div class="spinner"></div>
+        <p id="loading-text">Processing...</p>
+      </div>
+    </div>
+
+    <!-- ========== TOAST ========== -->
+    <div id="toast" class="toast hidden">
+      <div class="toast-content">
+        <span class="toast-icon" id="toast-icon"></span>
+        <span class="toast-message" id="toast-message"></span>
+      </div>
+    </div>
+
+    <!-- ========== MODAL / BOTTOM SHEET ========== -->
+    <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()">
+      <div class="modal-sheet" onclick="event.stopPropagation()">
+        <div class="modal-handle"></div>
+        <div id="modal-content"></div>
+      </div>
+    </div>
+
+    <!-- ========== ACCOUNT SUBPAGES ========== -->
+    <div id="screen-account-subpage" class="screen">
+      <div class="full-screen-page">
+        <div class="screen-top-bar">
+          <button class="back-btn" onclick="navigateTo('screen-main');showPage('page-account');">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <h2 id="subpage-title">Profile</h2>
+          <div style="width:40px"></div>
+        </div>
+        <div class="page-body scrollable" id="subpage-content">
+          <!-- Dynamic content -->
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end #app -->
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
