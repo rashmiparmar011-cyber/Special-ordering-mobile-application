@@ -540,12 +540,12 @@ function updateSelectedPharmacyName() {
   const selectedPharmacyName = document.getElementById('selected-pharmacy-name');
   if (selectedPharmacyName && selectedPharmacy) {
     const postcode = (selectedPharmacy.address.match(/[A-Z0-9]+\s+[A-Z0-9]+$/i)?.[0] || '');
-    const accountStr = selectedPharmacy.accountNo ? `<span style="background: rgba(255,255,255,0.2); color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: 700; margin: 0 4px; letter-spacing: 0.5px;">${selectedPharmacy.accountNo}</span>` : '';
-    const postcodeStr = postcode ? `<span style="color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: 600;">${postcode}</span>` : '';
-    selectedPharmacyName.innerHTML = `<span style="font-weight: 700; font-size: 14px;">${selectedPharmacy.name}</span>${accountStr}${postcodeStr}`;
+    const accountStr = selectedPharmacy.accountNo ? `<span style="background: rgba(255,255,255,0.2); color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-left: 8px;">${selectedPharmacy.accountNo}</span>` : '';
+    const postcodeStr = postcode ? `<span style="background: rgba(255,255,255,0.2); color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; margin-left: 4px;">${postcode}</span>` : '';
+    selectedPharmacyName.innerHTML = `<span style="font-weight: 700; font-size: 16px;">${selectedPharmacy.name}</span>${accountStr}${postcodeStr}`;
 
     const accName = document.getElementById('account-name');
-    if (accName) accName.innerHTML = `<span style="font-weight: 700; font-size: 14px;">${selectedPharmacy.name}</span>${accountStr}${postcodeStr}`;
+    if (accName) accName.innerHTML = `<span style="font-weight: 700; font-size: 18px;">${selectedPharmacy.name}</span>${accountStr}${postcodeStr}`;
   }
 }
 

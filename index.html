@@ -17,7 +17,7 @@
     <div id="screen-splash" class="screen active">
       <div class="splash-content">
         <div class="splash-logo-container">
-          <div class="splash-logo" style="background: transparent; backdrop-filter: none; border-radius: 50%; padding: 0; width: 140px; height: 140px; margin-bottom: 15px;">
+          <div class="splash-logo" style="background: white; border-radius: 50%; padding: 15px; width: 140px; height: 140px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
             <img src="images/bs-logo.png" alt="B&S Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%;" />
           </div>
           <h1 class="splash-title">B&S <span style="color: #48e5c2;">| SPECIALS</span></h1>
@@ -31,96 +31,60 @@
     </div>
 
     <!-- ========== LOGIN SCREEN ========== -->
-    <div id="screen-login" class="screen">
-      <div class="auth-screen">
-        <div class="auth-header">
-          <div class="auth-logo" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 10px; margin-top: 20px;">
-            <div class="auth-logo-icon" style="background: white; border-radius: 50%; padding: 4px; display: flex; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
-              <img src="images/bs-logo.png" alt="B&S Logo" style="width: 44px; height: 44px; object-fit: contain; border-radius: 50%;" />
+    <div id="screen-login" class="screen" style="background: #f8fafc; display: flex; justify-content: center; height: 100%; padding: 0;">
+      <div class="login-container" style="background: #f8fafc; width: 100%; max-width: 500px; height: 100%; padding: 40px 20px; display: flex; flex-direction: column; overflow-y: auto;">
+        <div class="login-header" style="background: transparent; padding: 20px 0 40px; text-align: center; flex-shrink: 0;">
+          <div class="auth-logo" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 12px;">
+            <div class="auth-logo-icon" style="background: white; border-radius: 50%; padding: 6px; display: flex; box-shadow: 0 4px 12px rgba(0,0,0,0.06); width: 56px; height: 56px; align-items: center; justify-content: center;">
+              <img src="images/bs-logo.png" alt="B&S Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 50%;" />
             </div>
-            <span style="color: #112A46; font-weight: 800; font-size: 24px; letter-spacing: 0.5px; text-transform: uppercase;">Specials</span>
+            <span style="color: #112A46; font-weight: 800; font-size: 26px; letter-spacing: 0.5px; text-transform: uppercase;">Specials</span>
           </div>
         </div>
         <div class="auth-body" style="padding-top: 10px;">
           <form id="login-form" class="auth-form" novalidate>
             <div id="login-email-fields">
-              <div class="form-group">
-                <label>Email Address</label>
-                <div class="input-wrapper">
-                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                  <input type="email" id="login-email" placeholder="pharmacy@example.com" value="admin@greencross.co.uk" />
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: none; margin-bottom: 8px; display: block; letter-spacing: 0;">Email Address</label>
+                <div class="input-wrapper" style="border: 1px solid #e2e8f0; border-radius: 12px; background: transparent; padding: 0 14px;">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" style="width: 16px; height: 16px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <input type="email" id="login-email" placeholder="pharmacy@example.com" value="admin@greencross.co.uk" style="color: #1e293b; font-weight: 500;" />
                 </div>
                 <span class="field-error" id="login-email-error"></span>
               </div>
-              <div class="form-group">
-                <label>Password</label>
-                <div class="input-wrapper">
-                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  <input type="password" id="login-password" placeholder="Enter your password" value="password123" />
-                  <button type="button" class="toggle-password" onclick="togglePassword('login-password', this)">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <div class="form-group" style="margin-bottom: 16px;">
+                <label style="font-size: 11px; font-weight: 700; color: #64748b; text-transform: none; margin-bottom: 8px; display: block; letter-spacing: 0;">Password</label>
+                <div class="input-wrapper" style="border: 1px solid #e2e8f0; border-radius: 12px; background: transparent; padding: 0 14px;">
+                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" style="width: 16px; height: 16px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <input type="password" id="login-password" placeholder="Enter your password" value="password123" style="color: #1e293b; font-weight: 800; font-size: 20px; letter-spacing: 2px;" />
+                  <button type="button" class="toggle-password" onclick="togglePassword('login-password', this)" style="color: #94a3b8;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                   </button>
                 </div>
                 <span class="field-error" id="login-password-error"></span>
               </div>
             </div>
-            <div id="login-mobile-fields" class="hidden">
-              <div class="form-group">
-                <label>Mobile Number</label>
-                <div class="input-wrapper">
-                  <span class="input-prefix">+44</span>
-                  <input type="tel" id="login-mobile" placeholder="7700 900000" />
-                </div>
-                <span class="field-error" id="login-mobile-error"></span>
-              </div>
-              <div class="form-group">
-                <label>Password</label>
-                <div class="input-wrapper">
-                  <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  <input type="password" id="login-mobile-pass" placeholder="Enter your password" />
-                </div>
-              </div>
-            </div>
-            <div id="login-otp-fields" class="hidden">
-              <div class="form-group">
-                <label>Mobile Number</label>
-                <div class="input-wrapper">
-                  <span class="input-prefix">+44</span>
-                  <input type="tel" id="login-otp-mobile" placeholder="7700 900000" />
-                </div>
-              </div>
-              <button type="button" class="btn btn-outline btn-full" onclick="sendLoginOTP()">Send OTP</button>
-              <div id="login-otp-entry" class="hidden" style="margin-top:16px;">
-                <div class="otp-inputs">
-                  <input type="text" maxlength="1" class="otp-box" data-otp="1" />
-                  <input type="text" maxlength="1" class="otp-box" data-otp="2" />
-                  <input type="text" maxlength="1" class="otp-box" data-otp="3" />
-                  <input type="text" maxlength="1" class="otp-box" data-otp="4" />
-                  <input type="text" maxlength="1" class="otp-box" data-otp="5" />
-                  <input type="text" maxlength="1" class="otp-box" data-otp="6" />
-                </div>
-              </div>
-            </div>
-            <div class="form-options">
-              <label class="checkbox-label">
-                <input type="checkbox" checked /> <span class="checkmark"></span> Remember Email
+            
+            <div class="form-options" style="margin-top: 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+              <label class="checkbox-label" style="display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; color: #64748b;">
+                <input type="checkbox" checked style="accent-color: #1e3a8a; width: 16px; height: 16px; cursor: pointer;" /> Remember Email
               </label>
-              <a href="#" onclick="navigateTo('screen-forgot-password');return false;" style="color: #1e3a8a; font-weight: 600;">Forgot Password?</a>
+              <a href="#" onclick="navigateTo('screen-forgot-password');return false;" style="color: #1e3a8a; font-weight: 700; font-size: 11px; text-decoration: none;">Forgot Password?</a>
             </div>
-            <button type="submit" class="btn btn-primary btn-full" id="login-btn" style="background: #1e3a8a; border-color: #1e3a8a;">
-              <span>Sign In</span>
+            <button type="submit" class="btn btn-primary btn-full" id="login-btn" style="background: #254079; border: none; border-radius: 12px; padding: 14px; font-weight: 700; font-size: 14px; color: white;">
+              Sign In
             </button>
           </form>
-          <div class="auth-footer">
-            <p>Don't have an account? <a href="#" onclick="navigateTo('screen-register');return false;" style="color: #1e3a8a; font-weight: 600;">Register</a></p>
+          <div class="auth-footer" style="margin-top: 16px; text-align: center;">
+            <p style="font-size: 11px; font-weight: 500; color: #64748b;">Don't have an account? <a href="#" onclick="navigateTo('screen-register');return false;" style="color: #1e3a8a; font-weight: 700; text-decoration: none;">Register</a></p>
           </div>
         </div>
-        <div class="powered-by-footer" style="text-align: center; margin-top: 120px; padding-bottom: 20px;">
-          <p style="font-size: 11px; color: #64748b; margin-bottom: 8px; font-weight: 500;">Powered by</p>
+        <div class="powered-by-footer" style="text-align: center; margin-top: auto; padding-top: 40px; padding-bottom: 20px; flex-shrink: 0;">
+          <p style="font-size: 10px; color: #94a3b8; margin-bottom: 8px; font-weight: 600;">Powered by</p>
           <div style="display: flex; justify-content: center; align-items: center; gap: 16px;">
             <img src="images/bs-logo.png" alt="B&S Logo" style="height: 32px; object-fit: contain;" />
-            <div style="width: 1px; height: 24px; background: #e2e8f0;"></div>
-            <img src="images/thame-logo.png" alt="Thame Logo" style="height: 24px; object-fit: contain;" />
+            <div style="width: 1px; height: 20px; background: #e2e8f0;"></div>
+            <img src="images/thame-logo.png" alt="Thame Logo" style="height: 20px; object-fit: contain;" />
           </div>
         </div>
       </div>
@@ -339,9 +303,9 @@
             <div class="page-header-dashboard" style="background: #1e3a8a; padding: 16px 20px; border-radius: 0 0 16px 16px; margin-bottom: 8px; position: relative; z-index: 101;">
               <div style="display: flex; align-items: center; justify-content: space-between; color: white; cursor: pointer;" onclick="document.getElementById('pharmacy-smart-dropdown').style.display = document.getElementById('pharmacy-smart-dropdown').style.display === 'none' ? 'block' : 'none'">
                 <div style="display: flex; align-items: center; gap: 8px;">
-                  <h2 id="selected-pharmacy-name" style="font-size: 16px; font-weight: 700; margin: 0; color: white;">Green Cross Pharmacy</h2>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
+                  <h2 id="selected-pharmacy-name" style="font-size: 16px; font-weight: 700; margin: 0; color: white; display: flex; align-items: center;">
+                    Green Cross Pharmacy
+                  </h2>
                 </div>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
@@ -370,7 +334,11 @@
               <div style="padding: 12px 20px;">
                 <div class="search-bar" style="background: white; border: 1px solid #e2e8f0; border-radius: 24px; padding: 10px 16px; display: flex; align-items: center; gap: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                   <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                  <input type="text" placeholder="Search by Order No, Date" style="border: none; outline: none; width: 100%; font-size: 14px;" />
+                  <input type="text" id="home-search-input" placeholder="Search by Order No or Date" oninput="searchHomeOrders(this.value)" style="border: none; outline: none; width: 100%; font-size: 14px;" />
+                  <div style="position: relative; display: flex; align-items: center;">
+                    <input type="date" onchange="if(this.value){ let d = new Date(this.value); let m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; let str = d.getDate() + ' ' + m[d.getMonth()] + ' ' + d.getFullYear(); let inp = document.getElementById('home-search-input'); inp.value = str; searchHomeOrders(str); }" style="position: absolute; opacity: 0; width: 24px; height: 24px; right: 0; cursor: pointer; z-index: 10;" />
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2" style="cursor: pointer;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  </div>
                 </div>
               </div>
 
@@ -499,8 +467,6 @@
               <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">Green Cross Pharmacy</h2>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
                 </div>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
@@ -514,24 +480,26 @@
                 <button class="order-tab active" data-otab="previous" onclick="setOrderTab('previous')" style="background: #1e3a8a; color: white; border-radius: 20px; padding: 6px 16px; border: none; font-weight: 600;">Previous Orders</button>
               </div>
               <div style="margin: 0 20px 16px; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); background: white;">
-                <div style="display: flex; justify-content: space-between; align-items: center; color: #2563eb; font-weight: 700; font-size: 12px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; color: #2563eb; font-weight: 700; font-size: 12px; cursor: pointer;" onclick="var c=document.getElementById('order-filter-content'); var i=document.getElementById('order-filter-chevron'); if(c.style.display==='none'){c.style.display='block';i.style.transform='rotate(0deg)';}else{c.style.display='none';i.style.transform='rotate(180deg)';}">
                   <div style="display: flex; align-items: center; gap: 6px;">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
                     FILTER HISTORICAL ORDERS
                   </div>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="18 15 12 9 6 15"/></svg>
+                  <svg id="order-filter-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="transition: transform 0.3s; transform: rotate(0deg);"><polyline points="18 15 12 9 6 15"/></svg>
                 </div>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
-                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Last 7 Days</button>
-                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Last 15 Days</button>
-                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Last 30 Days</button>
-                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Last 3 Months</button>
-                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">2025</button>
-                  <button style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">2024</button>
-                </div>
-                <div style="display: flex; gap: 12px;">
-                  <button style="flex: 1; padding: 10px; border: 1px solid #e2e8f0; background: white; color: #64748b; font-weight: 700; border-radius: 8px;">Clear</button>
-                  <button style="flex: 1; padding: 10px; border: none; background: #1e3a8a; color: white; font-weight: 700; border-radius: 8px;">Apply</button>
+                <div id="order-filter-content" style="display: block; margin-top: 12px;">
+                  <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px;">
+                  <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b=>{b.style.background='white';b.style.color='#64748b';b.style.border='1px solid #e2e8f0'});this.style.background='#1e3a8a';this.style.color='white';this.style.border='1px solid #1e3a8a'" style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer;">Last 7 Days</button>
+                  <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b=>{b.style.background='white';b.style.color='#64748b';b.style.border='1px solid #e2e8f0'});this.style.background='#1e3a8a';this.style.color='white';this.style.border='1px solid #1e3a8a'" style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer;">Last 15 Days</button>
+                  <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b=>{b.style.background='white';b.style.color='#64748b';b.style.border='1px solid #e2e8f0'});this.style.background='#1e3a8a';this.style.color='white';this.style.border='1px solid #1e3a8a'" style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer;">Last 30 Days</button>
+                  <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b=>{b.style.background='white';b.style.color='#64748b';b.style.border='1px solid #e2e8f0'});this.style.background='#1e3a8a';this.style.color='white';this.style.border='1px solid #1e3a8a'" style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer;">Last 3 Months</button>
+                  <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b=>{b.style.background='white';b.style.color='#64748b';b.style.border='1px solid #e2e8f0'});this.style.background='#1e3a8a';this.style.color='white';this.style.border='1px solid #1e3a8a'" style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer;">2025</button>
+                  <button class="filter-pill" onclick="document.querySelectorAll('.filter-pill').forEach(b=>{b.style.background='white';b.style.color='#64748b';b.style.border='1px solid #e2e8f0'});this.style.background='#1e3a8a';this.style.color='white';this.style.border='1px solid #1e3a8a'" style="border: 1px solid #e2e8f0; background: white; color: #64748b; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer;">2024</button>
+                  </div>
+                  <div style="display: flex; gap: 12px;">
+                    <button style="flex: 1; padding: 10px; border: 1px solid #e2e8f0; background: white; color: #64748b; font-weight: 700; border-radius: 8px; cursor: pointer;">Clear</button>
+                    <button style="flex: 1; padding: 10px; border: none; background: #1e3a8a; color: white; font-weight: 700; border-radius: 8px; cursor: pointer;">Apply</button>
+                  </div>
                 </div>
               </div>
               <div id="orders-list-container" class="orders-list">
@@ -569,8 +537,6 @@
               <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">Green Cross Pharmacy</h2>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
                 </div>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
@@ -592,8 +558,6 @@
               <div style="display: flex; align-items: center; justify-content: space-between; color: white;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <h2 style="font-size: 16px; font-weight: 700; margin: 0; color: white;">Green Cross Pharmacy</h2>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
                 </div>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </div>
@@ -676,9 +640,7 @@
             <div class="page-scroll" style="background: #f8fafc;">
               <div style="background: linear-gradient(135deg, #1e3a8a, #0f172a); border-radius: 0 0 32px 32px; padding: 24px 20px 48px; text-align: center; color: white; position: relative;">
                 <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-bottom: 8px;">
-                  <h2 style="font-size: 18px; font-weight: 700; margin: 0;">Green Cross Pharmacy</h2>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">B5010</span>
-                  <span style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600;">W8 4PT</span>
+                  <h2 style="font-size: 18px; font-weight: 700; margin: 0; display: flex; align-items: center; justify-content: center; gap: 8px;" id="account-name">Green Cross Pharmacy</h2>
                 </div>
                 <p style="color: #cbd5e1; font-size: 14px; margin: 0;">admin@greencross.co.uk</p>
               </div>
@@ -705,41 +667,28 @@
                     <div style="font-size: 10px; font-weight: 600; color: #cbd5e1; margin-bottom: 4px; text-transform: uppercase;">Payment Terms</div>
                     <div style="font-size: 14px; font-weight: 700;">Net 30</div>
                   </div>
-                  <div>
-                    <div style="font-size: 10px; font-weight: 600; color: #cbd5e1; margin-bottom: 4px; text-transform: uppercase;">Daily Limit</div>
-                    <div style="font-size: 14px; font-weight: 700;">£5,000</div>
-                  </div>
                 </div>
               </div>
               <!-- Account Menu -->
               <div class="account-menu" style="padding: 0 20px;">
                 <div class="menu-section" style="margin-bottom: 24px;">
                   <h4 style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; margin-left: 4px;">Orders & Activity</h4>
-                  <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
-                    <button class="menu-item" onclick="showPage('page-orders');switchTab('orders');" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                  <div style="display: flex; flex-direction: column; background: white; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;">
+                    <button class="menu-item" onclick="showPage('page-orders');switchTab('orders');" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: transparent; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                       <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
-                        <div class="mi-icon blue-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #eff6ff; color: #3b82f6; display: flex; align-items: center; justify-content: center;">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                        <div class="mi-icon" style="width: 32px; height: 32px; background: #3b82f6; border-radius: 8px; color: white; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                         </div>
                         <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">My Order</span>
                       </div>
                       <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
-                    <button class="menu-item" onclick="showPage('page-help');switchTab('help');" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                    <button class="menu-item" onclick="showPage('page-help');switchTab('help');" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: transparent; border: none; cursor: pointer;">
                       <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
-                        <div class="mi-icon orange-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #fff7ed; color: #f97316; display: flex; align-items: center; justify-content: center;">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" width="16" height="16"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                        <div class="mi-icon" style="width: 32px; height: 32px; background: #f97316; border-radius: 8px; color: white; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                         </div>
                         <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">Service Requests</span>
-                      </div>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
-                    <button class="menu-item" onclick="showAccountSubpage('prescriptions')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; cursor: pointer;">
-                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
-                        <div class="mi-icon green-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #f0fdf4; color: #22c55e; display: flex; align-items: center; justify-content: center;">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" width="16" height="16"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-                        </div>
-                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">My Prescriptions</span>
                       </div>
                       <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
@@ -748,38 +697,20 @@
 
                 <div class="menu-section" style="margin-bottom: 32px;">
                   <h4 style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; margin-left: 4px;">Account Settings</h4>
-                  <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
-                    <button class="menu-item" onclick="showPage('page-notifications')" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                  <div style="display: flex; flex-direction: column; background: white; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden;">
+                    <button class="menu-item" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: transparent; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                       <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
-                        <div class="mi-icon orange-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #fff7ed; color: #f97316; display: flex; align-items: center; justify-content: center;">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" width="16" height="16"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                        </div>
-                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">Notifications</span>
-                      </div>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
-                    <button class="menu-item" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
-                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
-                        <div class="mi-icon green-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #f0fdf4; color: #22c55e; display: flex; align-items: center; justify-content: center;">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" width="16" height="16"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <div class="mi-icon" style="width: 32px; height: 32px; background: #22c55e; border-radius: 8px; color: white; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                         </div>
                         <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">Privacy & Security</span>
                       </div>
                       <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
-                    <button class="menu-item" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
+                    <button class="menu-item logout-item" onclick="logout()" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: transparent; border: none; cursor: pointer;">
                       <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
-                        <div class="mi-icon purple-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #faf5ff; color: #a855f7; display: flex; align-items: center; justify-content: center;">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-                        </div>
-                        <span style="font-size: 14px; font-weight: 600; color: #1e3a8a;">App Settings</span>
-                      </div>
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" width="16" height="16"><polyline points="9 18 15 12 9 6"/></svg>
-                    </button>
-                    <button class="menu-item logout-item" onclick="logout()" style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 16px; background: white; border: none; cursor: pointer;">
-                      <div class="mi-left" style="display: flex; align-items: center; gap: 12px;">
-                        <div class="mi-icon red-bg" style="width: 32px; height: 32px; border-radius: 8px; background: #fef2f2; color: #ef4444; display: flex; align-items: center; justify-content: center;">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" width="16" height="16"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        <div class="mi-icon" style="width: 32px; height: 32px; background: #ef4444; border-radius: 8px; color: white; display: flex; align-items: center; justify-content: center;">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                         </div>
                         <span style="font-size: 14px; font-weight: 600; color: #ef4444;">Logout</span>
                       </div>
