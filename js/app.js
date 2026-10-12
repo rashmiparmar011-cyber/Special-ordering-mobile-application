@@ -1886,7 +1886,17 @@ let supportHistoryStatus = {
 
 function setSupportTab(tab) {
   document.querySelectorAll('.support-tabs .order-tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.stab === tab);
+    const isActive = t.dataset.stab === tab;
+    t.classList.toggle('active', isActive);
+    if (isActive) {
+      t.style.background = '#1e3a8a';
+      t.style.color = 'white';
+      t.style.border = 'none';
+    } else {
+      t.style.background = 'white';
+      t.style.color = '#64748b';
+      t.style.border = '1px solid #e2e8f0';
+    }
   });
   renderSupportContent(tab);
 }
@@ -1992,77 +2002,74 @@ function renderSupportContent(tab) {
   } else if (tab === 'product-support') {
     container.innerHTML = `
       <div class="support-content" style="text-align: left;">
-        <div class="support-form" style="background:white; padding:20px; border-radius:var(--radius-lg); border:1px solid var(--border); box-shadow:var(--shadow-sm);">
-          <h3 style="font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 10px; border-bottom: 2px solid var(--border-light); padding-bottom: 8px;">Product Enquiry</h3>
+        <div class="support-form" style="background:white; border-radius: 12px; border:1px solid #f1f5f9; padding:20px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: #1e3a8a; margin-bottom: 20px; border-bottom: 1px solid #f1f5f9; padding-bottom: 16px;">Product Enquiry</h3>
           
-          <div class="form-group compact">
-            <label>Product Description <span style="color:#DC2626; font-weight:700;">*</span></label>
-            <div class="input-wrapper textarea-wrapper compact" id="support-prod-desc-wrapper">
- 
-              <textarea id="support-prod-desc" placeholder="Describe the product you are looking for.." rows="1" oninput="clearSupportFieldError('support-prod-desc')"></textarea>
+          <div class="form-group compact" style="margin-bottom: 16px;">
+            <label style="font-size: 13px; font-weight: 600; color: #64748b; display: block; margin-bottom: 8px;">Product Description <span style="color:#ef4444;">*</span></label>
+            <div class="input-wrapper textarea-wrapper compact" id="support-prod-desc-wrapper" style="border:none;">
+              <textarea id="support-prod-desc" placeholder="Describe the product you are looking for.." rows="2" oninput="clearSupportFieldError('support-prod-desc')" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; color: #1e293b; background: white; resize: none; font-family: inherit; box-sizing: border-box; outline:none;"></textarea>
             </div>
             <span class="field-error" id="support-prod-desc-error"></span>
           </div>
           
-          <div class="form-group compact">
-            <label>Pack Size</label>
-            <div class="input-wrapper compact">
-            
-              <input type="text" id="support-prod-packsize" placeholder="e.g. 28 tablets" style="flex: 1; border: none; background: transparent; padding: 8px 0; font-size: 12px; color: var(--text-primary); outline: none;" />
+          <div class="form-group compact" style="margin-bottom: 16px;">
+            <label style="font-size: 13px; font-weight: 600; color: #64748b; display: block; margin-bottom: 8px;">Pack Size</label>
+            <div class="input-wrapper compact" style="border:none;">
+              <input type="text" id="support-prod-packsize" placeholder="e.g. 28 tablets" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; color: #1e293b; background: white; box-sizing: border-box; outline: none;" />
             </div>
           </div>
           
-          <div class="form-group compact">
-            <label>Prescription Type <span style="color:#DC2626; font-weight:700;">*</span></label>
-            <div class="input-wrapper compact" id="support-prod-rx-type-wrapper" style="padding: 8px 10px; gap: 24px;">
-              <label class="radio-label" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-primary); cursor: pointer; font-weight: 500; margin: 0;">
-                <input type="radio" name="support-prod-rx-type" value="Private" style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; margin: 0;" onclick="clearSupportFieldError('support-prod-rx-type')" />
+          <div class="form-group compact" style="margin-bottom: 16px;">
+            <label style="font-size: 13px; font-weight: 600; color: #64748b; display: block; margin-bottom: 8px;">Prescription Type <span style="color:#ef4444;">*</span></label>
+            <div id="support-prod-rx-type-wrapper" style="background: #f8fafc; border-radius: 8px; padding: 12px 24px; display: flex; align-items: center; justify-content: space-around; box-sizing: border-box; border: 1px solid transparent;">
+              <label style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #1e293b; cursor: pointer; font-weight: 600; margin: 0;">
+                <input type="radio" name="support-prod-rx-type" value="Private" style="width: 18px; height: 18px; accent-color: #1e3a8a; cursor: pointer; margin: 0;" onclick="clearSupportFieldError('support-prod-rx-type')" />
                 <span>Private</span>
               </label>
-              <label class="radio-label" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-primary); cursor: pointer; font-weight: 500; margin: 0;">
-                <input type="radio" name="support-prod-rx-type" value="NHS" checked style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; margin: 0;" onclick="clearSupportFieldError('support-prod-rx-type')" />
+              <label style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #1e293b; cursor: pointer; font-weight: 600; margin: 0;">
+                <input type="radio" name="support-prod-rx-type" value="NHS" checked style="width: 18px; height: 18px; accent-color: #1e3a8a; cursor: pointer; margin: 0;" onclick="clearSupportFieldError('support-prod-rx-type')" />
                 <span>NHS</span>
               </label>
             </div>
             <span class="field-error" id="support-prod-rx-type-error"></span>
           </div>
           
-          <div class="form-group compact">
-            <label>Response type <span style="color:#DC2626; font-weight:700;">*</span></label>
-            <div class="input-wrapper compact" id="support-prod-priority-wrapper" style="padding: 8px 10px; gap: 24px;">
-              <label class="radio-label" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-primary); cursor: pointer; font-weight: 500; margin: 0;">
-                <input type="radio" name="support-prod-priority" value="Call Back" style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; margin: 0;" onclick="clearSupportFieldError('support-prod-priority')" />
+          <div class="form-group compact" style="margin-bottom: 16px;">
+            <label style="font-size: 13px; font-weight: 600; color: #64748b; display: block; margin-bottom: 8px;">Response Type <span style="color:#ef4444;">*</span></label>
+            <div id="support-prod-priority-wrapper" style="background: #f8fafc; border-radius: 8px; padding: 12px 24px; display: flex; align-items: center; justify-content: space-around; box-sizing: border-box; border: 1px solid transparent;">
+              <label style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #1e293b; cursor: pointer; font-weight: 600; margin: 0;">
+                <input type="radio" name="support-prod-priority" value="Call Back" style="width: 18px; height: 18px; accent-color: #1e3a8a; cursor: pointer; margin: 0;" onclick="clearSupportFieldError('support-prod-priority')" />
                 <span>Call Back</span>
               </label>
-              <label class="radio-label" style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-primary); cursor: pointer; font-weight: 500; margin: 0;">
-                <input type="radio" name="support-prod-priority" value="Email" checked style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; margin: 0;" onclick="clearSupportFieldError('support-prod-priority')" />
+              <label style="display: flex; align-items: center; gap: 12px; font-size: 14px; color: #1e293b; cursor: pointer; font-weight: 600; margin: 0;">
+                <input type="radio" name="support-prod-priority" value="Email" checked style="width: 18px; height: 18px; accent-color: #1e3a8a; cursor: pointer; margin: 0;" onclick="clearSupportFieldError('support-prod-priority')" />
                 <span>Email</span>
               </label>
             </div>
             <span class="field-error" id="support-prod-priority-error"></span>
           </div>
-            
-          <div class="form-group compact">
-            <label>Notes (Optional)</label>
-            <div class="input-wrapper textarea-wrapper compact">
-              
-              <textarea id="support-prod-notes" placeholder="Enter any information" rows="1"></textarea>
+          
+          <div class="form-group compact" style="margin-bottom: 24px;">
+            <label style="font-size: 13px; font-weight: 600; color: #64748b; display: block; margin-bottom: 8px;">Notes (Optional)</label>
+            <div class="input-wrapper textarea-wrapper compact" style="border:none;">
+              <textarea id="support-prod-notes" placeholder="Enter any information" rows="2" style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; color: #1e293b; background: white; resize: none; font-family: inherit; box-sizing: border-box; outline:none;"></textarea>
             </div>
           </div>
           
-          <button class="btn btn-primary btn-full" style="margin-top:8px;" onclick="submitProductSupportRequest()">Submit Product Request</button>
+          <button id="prod-submit-btn" class="btn btn-full" style="background: #1e3a8a; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; width: 100%;" onclick="submitProductSupportRequest()">Submit Product Request</button>
         </div>
 
         <!-- History Section for Product Support -->
-        <div class="history-section" style="margin-top: 16px; border-top: 1px solid var(--border); padding-top: 16px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <h3 style="font-size: 15px; font-weight: 700; color: var(--primary); margin:0;">Product Enquiry History</h3>
-            <div style="display:flex; background:var(--border-light); padding:2px; border-radius:8px;">
-              <button onclick="toggleSupportHistoryStatus('product-support', 'open')" id="product-support-history-open-btn" class="support-sub-tab active" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:6px; cursor: pointer; transition:var(--transition); background:white; box-shadow:var(--shadow-sm); color:var(--primary);">Open</button>
-              <button onclick="toggleSupportHistoryStatus('product-support', 'closed')" id="product-support-history-closed-btn" class="support-sub-tab" style="font-size:12px; font-weight:600; padding:4px 12px; border-radius:6px; cursor: pointer; transition:var(--transition); background:none; box-shadow:none; color:var(--text-secondary);">Closed</button>
+        <div class="history-section" style="margin-top: 24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h3 style="font-size: 16px; font-weight: 700; color: #1e3a8a; margin:0;">Product Enquiry History</h3>
+            <div style="display:flex; background: white; border: 1px solid #e2e8f0; border-radius: 20px; overflow:hidden;">
+              <button onclick="toggleSupportHistoryStatus('product-support', 'open')" id="product-support-history-open-btn" class="support-sub-tab active" style="font-size:12px; font-weight:600; padding:6px 16px; border:none; cursor: pointer; background: white; color: #1e3a8a;">Open</button>
+              <button onclick="toggleSupportHistoryStatus('product-support', 'closed')" id="product-support-history-closed-btn" class="support-sub-tab" style="font-size:12px; font-weight:600; padding:6px 16px; border:none; cursor: pointer; background: transparent; color: #64748b;">Closed</button>
             </div>
           </div>
-          <div id="product-support-tickets-list">
+          <div id="product-support-tickets-list" style="display: flex; flex-direction: column; gap: 12px;">
             <!-- Tickets list goes here -->
           </div>
         </div>
@@ -2355,46 +2362,37 @@ function createTicketCard(ticket) {
     `;
   } else {
     return `
-      <div class="support-ticket fade-in" style="background: white; border-radius: var(--radius-md); padding: 10px; box-shadow: var(--shadow-sm); border: 1px solid var(--border); margin-bottom: 8px; text-align: left;">
+      <div class="support-ticket fade-in" style="background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; text-align: left;">
         <div class="ticket-header" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px;">
-          <div>
-            <div class="ticket-id" style="font-size:14px; font-weight:700; color:var(--primary);">${ticket.id}</div>
-          </div>
-          <span class="status-pill ${ticket.statusClass}" style="font-size:11px; padding:3px 8px; border-radius:100px;">${ticket.statusLabel}</span>
-        </div>
-        
-        <div class="ticket-body" style="margin-bottom: 4px;">
-          <p style="margin:0 0 6px; font-size:13px; color:var(--text-primary); font-weight:600; line-height:1.4;">
-            ${ticket.description}
-          </p>
-          
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; margin-bottom:6px;">
-            <div style="display:flex; flex-wrap:wrap; gap:4px;">
-              <span style="font-size:11px; background:#EEF2F6; color:var(--primary); padding:4px 8px; border-radius:6px; font-weight:600; display:inline-flex; align-items:center; gap:4px;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div style="width: 100%;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <div class="ticket-id" style="font-size:15px; font-weight:700; color:#1e3a8a;">${ticket.id}</div>
+              <span class="status-pill" style="font-size:12px; font-weight:600; color:#f59e0b; background:#fef3c7; padding:4px 12px; border-radius:20px;">Open</span>
+            </div>
+            <p style="margin:0 0 12px; font-size:14px; color:#1e293b; line-height:1.4;">
+              ${ticket.description}
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+              <div style="font-size:13px; color:#1e3a8a; font-weight:600; display:flex; align-items:center; gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                 Response: ${ticket.priority}
-              </span>
+              </div>
               ${ticket.packSize ? `
-                <span style="font-size:11px; background:#ECFDF5; color:#059669; padding:4px 8px; border-radius:6px; font-weight:600; display:inline-flex; align-items:center; gap:4px;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-                  Pack Size: ${ticket.packSize}
-                </span>
+              <div style="font-size:13px; color:#059669; font-weight:600; display:flex; align-items:center; gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+                Pack Size: ${ticket.packSize}
+              </div>
               ` : ''}
               ${ticket.rxType ? `
-                <span style="font-size:11px; background:#EFF6FF; color:#1D4ED8; padding:4px 8px; border-radius:6px; font-weight:600; display:inline-flex; align-items:center; gap:4px;">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                  Rx Type: ${ticket.rxType}
-                </span>
+              <div style="font-size:13px; color:#1D4ED8; font-weight:600; display:flex; align-items:center; gap:6px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                Rx Type: ${ticket.rxType}
+              </div>
               ` : ''}
             </div>
-            <div class="ticket-date" style="font-size:10px; color:var(--text-muted); text-align:right;">Submitted: ${ticket.date}</div>
+            <div class="ticket-date" style="font-size:13px; color:#64748b; margin-bottom:4px;">Submitted: ${ticket.date}</div>
+            ${ticket.notes ? `<div style="font-size:13px; color:#64748b; font-style:italic;">Notes: ${ticket.notes}</div>` : ''}
           </div>
-          
-          ${ticket.notes ? `
-            <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 4px; font-style: italic;">
-              Notes: ${ticket.notes}
-            </div>
-          ` : ''}
         </div>
       </div>
     `;
